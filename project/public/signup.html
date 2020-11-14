@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel = "stylesheet" type = "text/css" href = "style.css">
+    <title>Laundry ordering</title>
+  </head>
+  <body>
+    <label for="name">name</label>
+    <input type="text" class="form-control" id="nameInput" placeholder="name"><br/>
+    <label for="email">Email</label>
+    <input type="text" class="form-control" id="emailInput" placeholder="email"><br/>
+    <label for="password">password</label>
+    <input type="password" class="form-control" id="passwordInput" placeholder="password"><br/>
+    <button type = "submit" id="sign-up" class = "btn btn-primary">sign up</button>
+    <script>
+        document.getElementById('sign-up').addEventListener('click', () => {
+            const email = document.getElementById('emailInput').value;
+            const password = document.getElementById('passwordInput').value;
+            const name = document.getElementById('nameInput').value;
+            
+            fetch('/users', {
+                method: "post",
+                headers: {
+                "Content-Type" : "application/json; charset=utf-8"
+                },
+                body: JSON.stringify({name, email, password})
+            })
+            .then(responce => responce.json())
+            .then(data => window.location.replace("/orders.html"));
+    });
+    </script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+{
+  "name": "cursed_work",
+  "version": "1.0.0",
+  "description": "Cursed work",
+  "main": "src\\main.js",
+  "scripts": {
+    "start": "node src/main.js",
+    "dev": "nodemon src/main.js"
+  },
+  "author": "Artem Raiev",
+  "license": "MIT",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "express": "^4.17.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongodb": "^3.2.5",
+    "mongoose": "^5.5.9",
+    "validator": "^10.11.0"
+  },
+  "devDependencies": {
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.17.2"
+  }
+}

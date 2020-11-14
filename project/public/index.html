@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel = "stylesheet" type = "text/css" href = "style.css">
+    <title>Avalon Inc.</title>
+  </head>
+  <body>
+    <label for="email">Email</label>
+    <input type="text" class="form-control" id="emailInput" placeholder="email"><br/>
+    <label for="password">password</label>
+    <input type="password" class="form-control" id="passwordInput" placeholder="password"><br/>
+    <button type = "submit" id="login" class = "btn btn-primary">Login</button>
+    <a href = "./signup.html" class = "btn btn-primary">Sign up</a>
+    <script>
+      function getCookie(cname) {
+        var name = cname + "=";
+        var decodedCookie = decodeURIComponent(document.cookie);
+        var ca = decodedCookie.split(';');
+        for(var i = 0; i <ca.length; i++) {
+          var c = ca[i];
+          while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+          }
+          if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+          }
+        }
+        return "";
+      }
+
+      const token = getCookie('token');
+      if (token) {
+        const a = document.createElement('a');
+        a.setAttribute('href', './orders.html');
+        a.click();
+      }
+      
+        document.getElementById('login').addEventListener('click', () => {
+            const email = document.getElementById('emailInput').value;
+            const password = document.getElementById('passwordInput').value;
+            
+            fetch('/users/login', {
+                method: "post",
+                headers: {
+                "Content-Type" : "application/json; charset=utf-8"
+                },
+                body: JSON.stringify({email, password})
+            })
+            .then(responce => responce.json())
+            .then(({ token }) => {
+              document.cookie = `token=${token}; path=/orders.html`;
+              console.log(document.cookie);
+              window.location.replace("/orders.html");
+        })
+            .catch(err => console.log(err));
+    });
+    </script>
+</body>
+</html>
